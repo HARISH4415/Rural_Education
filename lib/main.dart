@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'screens/selection_screens.dart';
 import 'screens/game_screens.dart' hide DrawingScreen;
 import 'screens/home_screen.dart';
@@ -18,12 +17,6 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('studentBox');
   await Hive.openBox('settingsBox');
-
-  // Initialize Supabase (User needs to replace these with their own)
-  await Supabase.initialize(
-    url: 'https://kbnzsoxdngsnbxfypoko.supabase.co',
-    anonKey: 'sb_publishable_iuK2OH3EM-iHis0keHlYwQ_HUdVj7l8',
-  );
 
   runApp(const KidsLearningApp());
 }

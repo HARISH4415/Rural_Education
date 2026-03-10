@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:pinput/pinput.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import '../services/data_service.dart';
 import '../utils/app_theme.dart';
 
@@ -744,25 +743,8 @@ class _AuthPageState extends State<AuthPage> {
     if (localUser != null) {
       _navigateToDashboard(Map<String, dynamic>.from(localUser));
       return;
-    }
-
-    try {
-      final response =
-          await Supabase.instance.client
-              .from('students')
-              .select()
-              .eq('email', email)
-              .eq('password', pass)
-              .maybeSingle();
-
-      if (response != null) {
-        await DataService.saveStudentData(response);
-        _navigateToDashboard(response);
-      } else {
-        _showMsg("Invalid credentials!", isError: true);
-      }
-    } catch (e) {
-      _showMsg("Connection Error: Check your database settings", isError: true);
+    } else {
+      _showMsg("Invalid credentials!", isError: true);
     }
   }
 
